@@ -153,8 +153,8 @@ void loop() {
   }
   
   if(millis() - t_baca_MQ6 >= 500) { // Waktu baca 0,5 detik -> bisa diganti
-    //data_HC = mq2.readSmoke();
-    data_HC = mq2.readLPG();
+    data_HC = mq2.readSmoke();
+    //data_HC = mq2.readLPG();
     t_baca_MQ6 = millis();
   }
   
