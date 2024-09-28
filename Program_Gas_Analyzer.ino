@@ -153,11 +153,12 @@ void loop() {
   }
   
   if(millis() - t_baca_MQ6 >= 500) { // Waktu baca 0,5 detik -> bisa diganti
+    //data_HC = mq2.readSmoke();
     data_HC = mq2.readLPG();
     t_baca_MQ6 = millis();
   }
   
-  if((data_CO >= batas_co) || (data_HC >= batas_hc)) {
+  if((persen_CO >= batas_co) || (data_HC >= batas_hc)) {
     status_lcd = "NOK";
     if(millis() - t_notif >= 250) { // Waktu frekuensi kedipan dan bunyi
       if(nyala == LOW) {
@@ -201,9 +202,10 @@ void loop() {
     Serial.print("Suhu Oli    : ");
     Serial.println(suhuC);
     Serial.print("Kadar CO    : ");
-    Serial.println(data_CO);
-    Serial.print("Persen CO   : ");
-    Serial.println(persen_CO);
+    Serial.print(data_CO);
+    Serial.print("  (");
+    Serial.print(persen_CO);
+    Serial.println(" %)");
     Serial.print("Kadar HC    : ");
     Serial.println(data_HC);
     Serial.println();
@@ -225,11 +227,11 @@ String strnum3digit_desimal(float angka) {
   int nilai = int(angka);
   String hasil = "";
   if((nilai > 9) && (nilai < 100)) {
-    hasil = "0" + String(nilai);
+    hasil = "0" + String(angka);
   }else if((nilai >= 0) && (nilai < 10)){
-    hasil = "00" + String(nilai);
+    hasil = "00" + String(angka);
   }else{
-    hasil = String(nilai);
+    hasil = String(angka);
   }
   return hasil;
 }
